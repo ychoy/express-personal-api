@@ -21,6 +21,18 @@ app.use(function(req, res, next) {
 
 var db = require('./models');
 
+// added hardcoded values for profile
+var profile = [
+   { name: 'Yan Yin Choy' ,
+     githubLink: 'http://github.com/ychoy',
+     githubProfileImage: '' , // TODO update with image url later
+     personalSiteLink: 'http://ychoy.github.io',
+     currentCity: 'San Jose',
+     // TODO add later: isAwake: boolean,
+     // TODO add later: daysOld: '',
+   };
+];
+
 /**********
  * ROUTES *
  **********/
