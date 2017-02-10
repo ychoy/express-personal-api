@@ -30,7 +30,7 @@ var profile = [
      currentCity: 'San Jose',
      // TODO add later: isAwake: boolean,
      // TODO add later: daysOld: '',
-   };
+   }
 ];
 
 /**********
