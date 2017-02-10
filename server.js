@@ -49,11 +49,21 @@ app.get('/api', function apiIndex(req, res) {
     woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
     message: "Welcome to my personal api! Here's what you need to know!",
     documentationUrl: "https://github.com/example-username/express_self_api/README.md", // CHANGE ME
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
+    baseUrl: "http://powerful-hollows-02954.herokuapp.com", // CHANGE ME
     endpoints: [
-      {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api", description: "Describes all available endpoints"}, // show
+      {method: "GET", path: "/api/profile", description: "Data about me"}, //
+      {method: "GET", path: "/api/projects", description: "Show all my coding projects"},
+      {method: "POST", path: "/api/projects", description: "Create a new project"},
+      {method: "GET", path: "/api/projects/:id", description: "Find a project"},
+      {method: "PUT", path: "/api/projects/:id", description: "Updated a project"},
+      {method: "GET", path: "/api/projects/search", description: "Search all projects to find projects that match the query "},
+      {method: "DELETE", path: "/api/projects/:id", description: "Delete a project"},
+      {method: "GET", path: "/api/camping", description: "Show all my favorite camp sites "},
+      {method: "GET", path: "/api/camping/search", description: "Return search results for camping from query in the request"},
+      {method: "GET", path: "/api/camping/:id", description: "Find a campsite"},
+      {method: "PUT", path: "/api/camping/:id", description: "Update a campsite"},
+      {method: "DELETE", path: "/api/camping/:id", description: "Delete a campsite"}
     ]
   })
 });
