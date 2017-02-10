@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -48,8 +48,8 @@ app.get('/api', function apiIndex(req, res) {
   res.json({
     woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
     message: "Welcome to my personal api! Here's what you need to know!",
-    documentationUrl: "https://github.com/example-username/express_self_api/README.md", // CHANGE ME
-    baseUrl: "http://powerful-hollows-02954.herokuapp.com", // CHANGE ME
+    documentationUrl: "https://github.com/ychoy/express_self_api/README.md",
+    baseUrl: "http://powerful-hollows-02954.herokuapp.com",
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"}, // show
       {method: "GET", path: "/api/profile", description: "Data about me"}, //
