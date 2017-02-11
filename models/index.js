@@ -1,4 +1,7 @@
 var mongoose = require("mongoose");
 mongoose.connect( process.env.MONGODB_URI || "mongodb://localhost/personal-api");
 
-// module.exports.Campsite = require("./campsite.js.example");
+module.exports.Camping = require("./camping");
+module.exports.Trails = require("./trails");
+module.exports.CampingFeatures = require("./campingfeatures");
+module.exports.TrailFeatures = require("./trailsfeatures");
