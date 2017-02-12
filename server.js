@@ -64,13 +64,14 @@ app.get('/api', function apiIndex(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"}, // show
       {method: "GET", path: "/api/profile", description: "Data about me"}, //
-      {method: "GET", path: "/api/projects", description: "Show all my coding projects"},
-      {method: "POST", path: "/api/projects", description: "Create a new project"},
-      {method: "GET", path: "/api/projects/:id", description: "Find a project"},
-      {method: "PUT", path: "/api/projects/:id", description: "Updated a project"},
-      {method: "GET", path: "/api/projects/search", description: "Search all projects to find projects that match the query "},
-      {method: "DELETE", path: "/api/projects/:id", description: "Delete a project"},
+//      {method: "GET", path: "/api/projects", description: "Show all my coding projects"},
+//      {method: "POST", path: "/api/projects", description: "Create a new project"},
+//      {method: "GET", path: "/api/projects/:id", description: "Find a project"},
+//      {method: "PUT", path: "/api/projects/:id", description: "Updated a project"},
+//      {method: "GET", path: "/api/projects/search", description: "Search all projects to find projects that match the query "},
+//      {method: "DELETE", path: "/api/projects/:id", description: "Delete a project"},
       {method: "GET", path: "/api/camping", description: "Show all my favorite camp sites "},
+      {method: "POST", path: "/api/camping", description: "Create a new campsite"},
       {method: "GET", path: "/api/camping/search", description: "Return search results for camping from query in the request"},
       {method: "GET", path: "/api/camping/:id", description: "Find a campsite"},
       {method: "PUT", path: "/api/camping/:id", description: "Update a campsite"},
