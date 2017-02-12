@@ -3,9 +3,11 @@ var mongoose = require('mongoose'),
     Trails = require('./trails');
     CampingFeatures = require('./campingfeatures');
 
-var CampingCoordinatesSchema = new Schema({
-      longitude: Number,
-      latitude: Number
+var CampingGeometrySchema = new Schema({
+      coordinates: Array,
+      // first number is latitude
+      // second number is longitude
+
 });
 
 var CampingSchema = new Schema({
@@ -21,7 +23,7 @@ var CampingSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'CampingFeatures'
   },
-  coordinates: [CampingCoordinatesSchema]
+  coordinates: [CampingGeometrySchema]
 
 });
 
