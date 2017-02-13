@@ -7,11 +7,11 @@
     <title>Yan Yin Choy's Personal API</title>
 
     <!-- STYLESHEETS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/styles.css">
 
     <!-- VENDOR SCRIPTS -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
     <!-- APPLICATION SCRIPTS -->
     <script src="scripts/app.js"></script>
@@ -27,12 +27,36 @@
             <label for="title">Title</label>
             <input type="text" class="form-control" name="title" placeholder="Camping Spot">
           </div>
+          <div class="form-group">
+            <label for="title">Park</label>
+            <input type="text" class="form-control" name="park" placeholder="Park">
+          </div>
           <button type="submit" class="btn btn-default">Create camping spot</button>
         </form>
         <div id='campingTarget'>
+
+          <!-- handlebars template -->
+          <script id="camping-template" type="text/x-handlebars-template">
+            {{#each camping}}
+              <br>
+                <div class="row">
+                  <div class="col-xs-4">
+                    <img src="{{camping.images}}" class="img-responsive">
+                  </div>
+                  <div class="col-sm-8">
+                    <p><strong> {{camping.title}} </strong> - {{camping.park}}</p>
+                    <p> {{camping.description}} </p>
+                    <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data-id={{_id}}>Delete</button>
+                  </div>
+                </div>
+                <br>
+            {{/each}}
+          </script>
+
         </div>
       </div>
     </div>
+
   </div>
 </body>
 <footer>
