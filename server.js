@@ -25,7 +25,7 @@ var db = require('./models');
 var profile = [
    { name: 'Yan Yin Choy' ,
      githubLink: 'http://github.com/ychoy',
-     githubProfileImage: '' , // TODO update with image url later
+     githubProfileImage: 'https://avatars1.githubusercontent.com/u/20962963?v=3&s=460', 
      personalSiteLink: 'http://ychoy.github.io',
      currentCity: 'San Jose',
      // TODO add later: isAwake: boolean,
@@ -64,18 +64,20 @@ app.get('/api', function apiIndex(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"}, // show
       {method: "GET", path: "/api/profile", description: "Data about me"}, //
-//      {method: "GET", path: "/api/projects", description: "Show all my coding projects"},
-//      {method: "POST", path: "/api/projects", description: "Create a new project"},
-//      {method: "GET", path: "/api/projects/:id", description: "Find a project"},
-//      {method: "PUT", path: "/api/projects/:id", description: "Updated a project"},
-//      {method: "GET", path: "/api/projects/search", description: "Search all projects to find projects that match the query "},
-//      {method: "DELETE", path: "/api/projects/:id", description: "Delete a project"},
-      {method: "GET", path: "/api/camping", description: "Show all my favorite camp sites "},
-      {method: "POST", path: "/api/camping", description: "Create a new campsite"},
-      {method: "GET", path: "/api/camping/search", description: "Return search results for camping from query in the request"},
-      {method: "GET", path: "/api/camping/:id", description: "Find a campsite"},
-      {method: "PUT", path: "/api/camping/:id", description: "Update a campsite"},
-      {method: "DELETE", path: "/api/camping/:id", description: "Delete a campsite"}
+      {method: "GET", path: "/api/camping", description: "Show all my favorite camping spots"},
+      {method: "POST", path: "/api/camping", description: "Create a new camping spot"},
+      {method: "GET", path: "/api/camping/search", description: "Return search results for camping spots from query in the request"},
+      {method: "GET", path: "/api/camping/:id", description: "Find a camping spot"},
+      {method: "PUT", path: "/api/camping/:id", description: "Update a camping spot"},
+      {method: "DELETE", path: "/api/camping/:id", description: "Delete a camping spot"}
+      /* add later
+      {method: "GET", path: "/api/projects", description: "Show all my coding projects"},
+      {method: "POST", path: "/api/projects", description: "Create a new project"},
+      {method: "GET", path: "/api/projects/:id", description: "Find a project"},
+      {method: "PUT", path: "/api/projects/:id", description: "Updated a project"},
+      {method: "GET", path: "/api/projects/search", description: "Search all projects to find projects that match the query "},
+      {method: "DELETE", path: "/api/projects/:id", description: "Delete a project"},
+      */
     ]
   })
 });
