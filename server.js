@@ -98,6 +98,50 @@ app.get('/api/camping', function (req, res) {
         res.json(campingResults);
       });
 });
+
+// create new camping
+app.post('/api/camping', function (req, res) {
+    // create new camping with form data
+    var newCamping = new db.Camping({
+      title: campingData.title,
+      park: campingData.park,
+      description: campingData.description,
+      trail: campingData.trail,
+      image: campingData.images,
+      features: campingData.features,
+      coordinates: campingData.coordinates
+    });
+
+   db.CampingFeatures.find({name: req.body.features}, function(err, campingFeatures){
+      // if the feature exists then add feature to camping
+			if (features.length !== 0) {
+      	newCampingFeatures.features = campingFeatures;
+				newCampingFeatures.save(function(err,campingResults){
+        	if (err) {return console.log("error:" + err);}
+						console.log("new camping:" + camping.title);
+						res.json(campingResults);
+					})
+			} else {   //create new camping and add camping features to database
+				var newCampingFeatures = new db.CampingFeatures({   //add new feature
+					features: req.body.features,
+				});
+				newCampingFeatures.save(function(err, campingFeatures) {  //save new feature
+        	console.log("new author:" + campingFeatures);
+					newCampingFeatures.features = campingFeatures;
+
+      // add new camping to database
+     			newCamping.save(function(err, campingResults){  //save camping with features attribute
+        		if (err) {
+          		return console.log("create error: " + err);
+        		}
+        		console.log("created ", camping.title);
+        		res.json(campingResults);    // send camping to the view
+      		});
+				});
+			}
+   });
+
+});
 /**********
  * SERVER *
  **********/
