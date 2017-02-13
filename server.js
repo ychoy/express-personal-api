@@ -10,8 +10,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // allow cross origin requests (optional)
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
@@ -21,17 +21,7 @@ app.use(function(req, res, next) {
 
 var db = require('./models');
 
-// added hardcoded values for profile
-var profile = [
-   { name: 'Yan Yin Choy' ,
-     githubLink: 'http://github.com/ychoy',
-     githubProfileImage: 'https://avatars1.githubusercontent.com/u/20962963?v=3&s=460', 
-     personalSiteLink: 'http://ychoy.github.io',
-     currentCity: 'San Jose',
-     // TODO add later: isAwake: boolean,
-     // TODO add later: daysOld: '',
-   }
-];
+
 
 /**********
  * ROUTES *
@@ -78,8 +68,20 @@ app.get('/api', function apiIndex(req, res) {
       {method: "GET", path: "/api/projects/search", description: "Search all projects to find projects that match the query "},
       {method: "DELETE", path: "/api/projects/:id", description: "Delete a project"},
       */
-    ]
+    ],
   })
+});
+
+app.get('/api/profile', function profile(req,res){
+  res.json({
+    name: 'Yan Yin Choy',
+    githubLink: 'http://github.com/ychoy',
+    githubProfileImage: 'https://avatars1.githubusercontent.com/u/20962963?v=3&s=460',
+    personalSite: 'http://ychoy.github.io',
+    currentCity: 'San Jose',
+    pets: false,
+    interests: ['hiking', 'painting', 'camping', 'local small businesses', 'live music', 'civic innovation', 'developing new leaders', 'sustainability', 'affordable housing' ]
+  });
 });
 
 /**********
