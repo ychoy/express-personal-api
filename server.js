@@ -142,6 +142,22 @@ app.post('/api/camping', function (req, res) {
    });
 
 });
+
+app.get('/api/camping/:id', function (req, res) {
+  // find camping by its id
+  db.Camping.findById(req.params.id)
+    // populate the features
+    .populate('campingfeatures')
+    .exec(function(err, campingResults){
+      if (err) {
+        res.status(500).send(err);
+        return;
+      }
+      res.json(campingResults);
+    });
+
+});
+
 /**********
  * SERVER *
  **********/
