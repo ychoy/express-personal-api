@@ -47,7 +47,7 @@ app.get('/api', function apiIndex(req, res) {
   res.json({
     message: "Welcome to my personal api! Here's what you need to know!",
     documentationUrl: "https://github.com/ychoy/express_self_api/README.md",
-    baseUrl: "http://powerful-hollows-02954.herokuapp.com",
+    baseUrl: "https://powerful-hollows-02954.herokuapp.com",
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"}, // show
       {method: "GET", path: "/api/profile", description: "Data about me"}, //
