@@ -53,7 +53,7 @@ var camping_list = [
     park: 'Henry W. Coe State Park',
     description: 'Henry Coe State Park is great for hiking and camping. The trail to China Hole is about ten miles round-trip with gradual inclines. Throughout the hike you will notice lush green rolling hills and once you reach the canyon the views are expansive. The Madrone forest is spectacular to meander through; its auburn brick red, twisted bark so different from typical trees you will see in the cities. The coyote creek is calm and teeming with wildlife. If you look closely in the spring, you might spot some tadpoles and frogs! This park is great for group camping.',
     trail: 'China Hole Trail Loop',
-    image: 'imagess/HenryCoeStatePark_MadroneForest.jpg',
+    image: 'images/HenryCoeStatePark_MadroneForest.jpg',
     features: [
       'Canyons',
       'Creek',
@@ -116,7 +116,7 @@ var camping_list = [
     park: 'Big Basin Redwoods State Park',
     description: 'Nestled in the Santa Cruz Mountains, Big Basin Redwoods State Park offers many different trails meandering through redwoods and providing expansive views of Monterey Bay and San José. The Berry Creek Loop is a ten mile round-trip hike where you are sure to find interesting species of fungi and wildflowers along the way to Berry Creek Falls. Berry Creek Falls is loud and refreshing.',
     trail: 'Berry Creek Loop',
-    image: 'imagess/BigBasinStatePark_BerryCreekFalls.jpg',
+    image: 'images/BigBasinStatePark_BerryCreekFalls.jpg',
     features:
       [
         'Creeks',
