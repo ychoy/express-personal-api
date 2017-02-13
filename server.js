@@ -18,10 +18,7 @@ app.use(function(req, res, next) {
 /************
  * DATABASE *
  ************/
-
 var db = require('./models');
-
-
 
 /**********
  * ROUTES *
@@ -103,13 +100,13 @@ app.post('/api/camping', function (req, res) {
     // create new camping with form data
     var newCamping = new db.Camping({
     //  id: camping.id,
-      title: camping.title,
-      park: camping.park,
-      description: camping.description,
-      trail: camping.trail,
-      images: camping.images,
-      features: camping.features,
-      coordinates: camping.coordinates
+      title: req.body.title,
+      park: req.body.park,
+      description: req.body.description,
+      trail: req.body.trail,
+      images: req.body.images,
+      features: req.body.features,
+      coordinates: req.body.coordinates
     });
 /*
    db.Features.find({name: req.body.features}, function(err, campingFeatures){
@@ -134,7 +131,7 @@ app.post('/api/camping', function (req, res) {
         		if (err) {
           		return console.log("create error: " + err);
         		}
-        		console.log("created ", camping.title);
+        		console.log("created ", req.body.title);
         		res.json(campingResults);    // send camping to the view
 
           });
@@ -173,7 +170,7 @@ app.get('/api/camping/search', function search(req, res) {
 
 
 
-//updates camping except for features
+//updates camping
 app.put("/api/camping/:_id", function(req, res){
   var campingId = req.params._id;
   db.Camping.findOne({_id: campingId}, function(err, updatedCamping){
@@ -182,7 +179,7 @@ app.put("/api/camping/:_id", function(req, res){
   		 res.status(500).send(err);
      } else if (updatedCamping === null) {
        res.status(404).json({error: 'No camping fround by this ID'});
-     } else { 
+     } else {
         updatedCamping.title = req.body.title,
         updatedCamping.park = req.body.park,
         updatedCamping.description = req.body.description,
@@ -195,7 +192,7 @@ app.put("/api/camping/:_id", function(req, res){
   				if (err) {
   					return console.log("update error: " + err);
   				}
-  				res.send(updatedCamping);
+  				res.send(saved);
   			});
      }
 
