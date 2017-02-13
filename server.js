@@ -103,13 +103,14 @@ app.get('/api/camping', function (req, res) {
 app.post('/api/camping', function (req, res) {
     // create new camping with form data
     var newCamping = new db.Camping({
-      title: campingData.title,
-      park: campingData.park,
-      description: campingData.description,
-      trail: campingData.trail,
-      image: campingData.images,
-      features: campingData.features,
-      coordinates: campingData.coordinates
+      id: camping.id,
+      title: camping.title,
+      park: camping.park,
+      description: camping.description,
+      trail: camping.trail,
+      images: camping.images,
+      features: camping.features,
+      coordinates: camping.coordinates
     });
 
    db.CampingFeatures.find({name: req.body.features}, function(err, campingFeatures){
@@ -157,6 +158,34 @@ app.get('/api/camping/:id', function (req, res) {
     });
 
 });
+
+//updates camping except for features
+app.put("/api/camping/:_id", function(req, res){
+  var bookId = req.params._id;
+
+  db.Camping.findOne({_id: campingId}, function(err, updatedCamping){
+		console.log(updatedCamping);
+		if (err) {
+		 res.status(500).send(err);
+		}
+      updatedCamping.id = req.body.id,
+      updatedCamping.title = req.body.title,
+      updatedCamping.park = req.body.park,
+      updatedCamping.description = req.body.description,
+      updatedCamping.trail = req.body.trail,
+      updatedCamping.images = req.body.images,
+      updatedCamping.features = req.body.features,
+      updatedCamping.coordinates = req.body.coordinates,
+
+			updatedCamping.save(function(err,saved){ //save updated attributes
+				if (err) {
+					return console.log("update error: " + err);
+				}
+				res.send(updatedCamping);
+			});
+    });
+});
+
 
 /**********
  * SERVER *
