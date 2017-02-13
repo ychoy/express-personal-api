@@ -89,7 +89,7 @@ app.get('/api/camping', function (req, res) {
     // send all camping as JSON response
     db.Camping.find()
       // populate fills in the camping feature id with all the camping feature data
-      .populate('campingfeatures')
+      .populate('features')
       .exec(function(err, campingResults){
         if (err) {
 					status(500).send(err);
@@ -109,26 +109,25 @@ app.post('/api/camping', function (req, res) {
       description: camping.description,
       trail: camping.trail,
       images: camping.images,
-      features: camping.features,
       coordinates: camping.coordinates
     });
 
-   db.CampingFeatures.find({name: req.body.features}, function(err, campingFeatures){
+   db.Features.find({name: req.body.features}, function(err, campingFeatures){
       // if the feature exists then add feature to camping
 			if (features.length !== 0) {
-      	newCampingFeatures.features = campingFeatures;
-				newCampingFeatures.save(function(err,campingResults){
+      	newFeatures.features = campingFeatures;
+				newFeatures.save(function(err, campingResults){
         	if (err) {return console.log("error:" + err);}
 						console.log("new camping:" + camping.title);
 						res.json(campingResults);
 					})
 			} else {   //create new camping and add camping features to database
-				var newCampingFeatures = new db.CampingFeatures({   //add new feature
+				var newFeatures = new db.Features({   //add new feature
 					features: req.body.features,
 				});
-				newCampingFeatures.save(function(err, campingFeatures) {  //save new feature
+				newFeatures.save(function(err, campingFeatures) {  //save new feature
         	console.log("new author:" + campingFeatures);
-					newCampingFeatures.features = campingFeatures;
+					newFeatures.features = campingFeatures;
 
       // add new camping to database
      			newCamping.save(function(err, campingResults){  //save camping with features attribute
@@ -164,7 +163,7 @@ app.get('/api/camping/search', function search(req, res) {
 
   var campingTitle = (req.query.q);
 
-  // filter todos array for query.   
+  // filter todos array for query.
 	var campingToSearch = camping.filter(function(camping){
 	  console.log(camping.title);
 	  // check specific property of the object
@@ -191,7 +190,7 @@ app.put("/api/camping/:_id", function(req, res){
       updatedCamping.description = req.body.description,
       updatedCamping.trail = req.body.trail,
       updatedCamping.images = req.body.images,
-      updatedCamping.features = req.body.features,
+      updatedCamping.features.features = req.body.features.features,
       updatedCamping.coordinates = req.body.coordinates,
 			updatedCamping.save(function(err,saved){ //save updated attributes
 				if (err) {

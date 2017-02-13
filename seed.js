@@ -223,16 +223,15 @@ var camping_features_List = [
 
   */
 
-db.CampingFeatures.remove({}, function(err, authors) {
-  console.log('removed all authors');
-  db.CampingFeatures.create(camping_features_List, function(err, features){
+db.Features.remove({}, function(err, features) {
+  console.log('removed all features');
+  db.Features.create(camping_features_List, function(err, features){
     if (err) {
       console.log(err);
       return;
     }
     console.log('recreated all camping features');
     console.log("created", features.length, "camping features");
-
 
     db.Camping.remove({}, function(err, camping){
       console.log('removed all camping');
@@ -244,14 +243,13 @@ db.CampingFeatures.remove({}, function(err, authors) {
           description: campingData.description,
           trail: campingData.trail,
           image: campingData.images,
-					features: campingData.features,
           coordinates: campingData.coordinates
 
         });
-        db.CampingFeatures.findOne({features: campingData.features}, function (err, foundFeatures) {
+        db.Features.findOne({features: campingData.features}, function (err, foundFeatures) {
 					console.log(camping.features);
 
-          console.log('found camping ' + foundFeatures.features + ' for camping ' + camping.features);
+          console.log('found features ' + foundFeatures.features + ' for camping ' + camping.features);
           if (err) {
             console.log(err);
             return;
