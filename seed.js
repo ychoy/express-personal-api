@@ -64,10 +64,10 @@ var camping_list = [
       'Wildflowers'
     ],
   coordinates:
-    [
+      [
        37.1867803,
        -121.5493913
-    ]
+      ]
     },
     {
     id: 4,
@@ -133,18 +133,20 @@ var camping_list = [
 ];
 
 var camping_features_List = [
-  {
-    id: 1,
-    features: [
+    {
+  //  id: 1,
+    features:
+      [
         'Coast',
         'Creeks',
         'Redwoods',
         'Waterfalls'
       ]
-  },
-  {
-    id: 2,
-    features: [
+    },
+    {
+  //  id: 2,
+    features:
+      [
         'Beach walks',
         'Coastline',
         'Lakes',
@@ -153,9 +155,9 @@ var camping_features_List = [
         'Waterfalls',
         'Wildflowers'
       ]
-  },
-  {
-    id: 3,
+    },
+    {
+  //  id: 3,
     features: [
       'Canyons',
       'Creek',
@@ -165,36 +167,40 @@ var camping_features_List = [
       'Wildlife',
       'Wildflowers'
     ]
-  },
-  {
-    id: 4,
-    features: [
-      'Caves',
-      'Peaks',
-      'Sandstone',
-      'Wildlife',
+    },
+    {
+  //  id: 4,
+    features:
+      [
+        'Caves',
+        'Peaks',
+        'Sandstone',
+        'Wildlife',
 
-    ]
-  },
-  {
-    id: 5,
-    features: [
-      'Creeks',
-      'Redwoods',
-      'Rivers',
-      'Sandhills',
-    ],
-  },
-  {
-    id: 6,
-    features: [
-      'Creeks',
-      'Redwoods',
-      'Waterfalls',
-      'Wildflowers'
-    ]
-  }
+      ]
+    },
+    {
+//    id: 5,
+    features:
+      [
+        'Creeks',
+        'Redwoods',
+        'River',
+        'Sandhills',
+      ]
+    },
+    {
+//    id: 6,
+    features:
+      [
+        'Creeks',
+        'Redwoods',
+        'Waterfalls',
+        'Wildflowers'
+      ]
+    }
 ];
+
 
  /* Note - in the future, include more information on trails:
   Limekiln Falls
@@ -242,10 +248,10 @@ db.CampingFeatures.remove({}, function(err, authors) {
           coordinates: campingData.coordinates
 
         });
-        db.CampingFeatures.findOne({name: campingData.features}, function (err, foundFeatures) {
-					console.log(camping.title);
+        db.CampingFeatures.findOne({features: campingData.features}, function (err, foundFeatures) {
+					console.log(camping.features);
 
-          console.log('found camping ' + foundFeatures.name + ' for camping ' + camping.title);
+          console.log('found camping ' + foundFeatures.features + ' for camping ' + camping.features);
           if (err) {
             console.log(err);
             return;
