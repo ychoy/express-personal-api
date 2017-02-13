@@ -144,8 +144,8 @@ app.post('/api/camping', function (req, res) {
 
 });
 
+// Find camping by its id
 app.get('/api/camping/:id', function (req, res) {
-  // find camping by its id
   db.Camping.findById(req.params.id)
     // populate the features
     .populate('campingfeatures')
@@ -156,8 +156,25 @@ app.get('/api/camping/:id', function (req, res) {
       }
       res.json(campingResults);
     });
-
 });
+
+//search for camping
+app.get('/api/camping/search', function search(req, res) {
+  /* This endpoint responds with the search results from query in request. */
+
+  var campingTitle = (req.query.q);
+
+  // filter todos array for query.   
+	var campingToSearch = camping.filter(function(camping){
+	  console.log(camping.title);
+	  // check specific property of the object
+    return camping.title == campingTitle;
+  });   // if there is a match return match
+
+ res.json({ data: campingToSearch });  // respond with the search results from the query
+});
+
+
 
 //updates camping except for features
 app.put("/api/camping/:_id", function(req, res){
