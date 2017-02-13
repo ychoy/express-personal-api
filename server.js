@@ -84,6 +84,20 @@ app.get('/api/profile', function profile(req,res){
   });
 });
 
+// get all camping
+app.get('/api/camping', function (req, res) {
+    // send all camping as JSON response
+    db.Camping.find()
+      // populate fills in the camping feature id with all the camping feature data
+      .populate('campingfeatures')
+      .exec(function(err, campingResults){
+        if (err) {
+					status(500).send(err);
+					return;
+				}
+        res.json(campingResults);
+      });
+});
 /**********
  * SERVER *
  **********/
