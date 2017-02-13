@@ -10,7 +10,7 @@ var camping_list = [
     park: 'Limekiln State Park',
     description: 'Limekiln State Park is a hidden gen in Big Sur, California. I have only gone during the winter, but it is perfect because it is within a short walk to a secluded beach and a short hike to Limekiln Falls. It is also incredible to sleep next to the creek and listen to the sounds of the roaring water rush by. The Limekiln Falls Trail is for the adventurous. There are multiple creek crossings and during a season when the tide is high and rain abundant, it will be particularly trickier to complete each fork. You can either wade through the creek or balance on tree branch bridges. Be careful! The branches can be slippery to walk on top of. The view of the Limekiln Falls is breahtaking. There are two waterfalls. Along the way, you can visit the remnants of the old Limekilns. An added bonus: there are heated showers! Great camping for jam sessions, looking at the moonlight reflecting off the crashing waves.',
     trail: 'Limekiln Falls Trail',
-    image: 'images/LimekilnStatePark_RainbowoverLimekilnCreekFalls.jpg',
+    image: 'images/LimekilnStatePark_RainbowoverLimekilnCreekFalls.png',
     features:
       [
         'Coast',
@@ -231,7 +231,7 @@ var camping_features_list = [
           park: campingData.park,
           description: campingData.description,
           trail: campingData.trail,
-          image: campingData.images,
+          image: campingData.image,
           features: campingData.features,
           coordinates: campingData.coordinates
 
