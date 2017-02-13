@@ -103,7 +103,7 @@ app.get('/api/camping', function (req, res) {
 app.post('/api/camping', function (req, res) {
     // create new camping with form data
     var newCamping = new db.Camping({
-      id: camping.id,
+    //  id: camping.id,
       title: camping.title,
       park: camping.park,
       description: camping.description,
@@ -161,14 +161,14 @@ app.get('/api/camping/:id', function (req, res) {
 app.get('/api/camping/search', function search(req, res) {
   /* This endpoint responds with the search results from query in request. */
 
-  var campingTitle = (req.query.q);
+  var campingPark = (req.query.q);
 
-  // filter todos array for query.
+  // filter camping array for query.
 	var campingToSearch = camping.filter(function(camping){
-	  console.log(camping.title);
+	  console.log(camping.park);
 	  // check specific property of the object
-    return camping.title == campingTitle;
-  });   // if there is a match return match
+    return camping.park.includes(campingPark);
+  });   // if the query is included in the park name
 
  res.json({ data: campingToSearch });  // respond with the search results from the query
 });
@@ -177,7 +177,7 @@ app.get('/api/camping/search', function search(req, res) {
 
 //updates camping except for features
 app.put("/api/camping/:_id", function(req, res){
-  var bookId = req.params._id;
+  var campingId = req.params._id;
 
   db.Camping.findOne({_id: campingId}, function(err, updatedCamping){
 		console.log(updatedCamping);

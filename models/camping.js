@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
     Features = require('./features');
 
 var CampingSchema = new Schema({
-  id: Number,
+//  id: Number,
   title: String,
   park: String,
   description: String,
