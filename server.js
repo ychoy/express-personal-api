@@ -176,7 +176,6 @@ app.put("/api/camping/:_id", function(req, res){
       updatedCamping.images = req.body.images,
       updatedCamping.features = req.body.features,
       updatedCamping.coordinates = req.body.coordinates,
-
 			updatedCamping.save(function(err,saved){ //save updated attributes
 				if (err) {
 					return console.log("update error: " + err);
@@ -185,6 +184,17 @@ app.put("/api/camping/:_id", function(req, res){
 			});
     });
 });
+
+/* Delete camping listing */
+app.delete('/api/camping/:id', function destroy(req, res) {
+  // get camping id from url params (`req.params`)
+  var campingId = req.params.id;
+  // find camping listing in db by id and remove
+  db.Camping.findOneAndRemove({ _id: campingId }, function (err, deletedCamping) {
+    res.json(deletedCamping);
+  });
+});
+
 
 
 /**********
