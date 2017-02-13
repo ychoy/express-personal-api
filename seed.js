@@ -5,7 +5,7 @@ var db = require('./models');
 
 var camping_list = [
     {
-//    id: 1,
+    id: 1,
     title: 'Limekiln State Park',
     park: 'Limekiln State Park',
     description: 'Limekiln State Park is a hidden gen in Big Sur, California. I have only gone during the winter, but it is perfect because it is within a short walk to a secluded beach and a short hike to Limekiln Falls. It is also incredible to sleep next to the creek and listen to the sounds of the roaring water rush by. The Limekiln Falls Trail is for the adventurous. There are multiple creek crossings and during a season when the tide is high and rain abundant, it will be particularly trickier to complete each fork. You can either wade through the creek or balance on tree branch bridges. Be careful! The branches can be slippery to walk on top of. The view of the Limekiln Falls is breahtaking. There are two waterfalls. Along the way, you can visit the remnants of the old Limekilns. An added bonus: there are heated showers! Great camping for jam sessions, looking at the moonlight reflecting off the crashing waves.',
@@ -132,7 +132,7 @@ var camping_list = [
     }
 ];
 
-var camping_features_List = [
+var camping_features_list = [
     {
   //  id: 1,
     features:
@@ -223,47 +223,24 @@ var camping_features_List = [
 
   */
 
-db.Features.remove({}, function(err, features) {
-  console.log('removed all features');
-  db.Features.create(camping_features_List, function(err, features){
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log('recreated all camping features');
-    console.log("created", features.length, "camping features");
-
     db.Camping.remove({}, function(err, camping){
       console.log('removed all camping');
       camping_list.forEach(function (campingData) {
         var camping = new db.Camping({
-          id: campingData.id,
           title: campingData.title,
           park: campingData.park,
           description: campingData.description,
           trail: campingData.trail,
           image: campingData.images,
+          features: campingData.features,
           coordinates: campingData.coordinates
 
         });
-        db.Features.findOne({features: campingData.features}, function (err, foundFeatures) {
-					console.log(camping.features);
-
-          console.log('found features ' + foundFeatures.features + ' for camping ' + camping.features);
-          if (err) {
-            console.log(err);
-            return;
-          }
-          camping.features = foundFeatures;
           camping.save(function(err, savedCamping){
             if (err) {
               return console.log(err);
             }
-            console.log('saved ' + savedCamping.title + ' by ' + foundFeatures.features);
-          });
+            console.log('saved ' + savedCamping);
         });
       });
-    });
-
-  });
-})
+    })

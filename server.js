@@ -87,10 +87,9 @@ app.get('/api/profile', function profile(req,res){
 // get all camping
 app.get('/api/camping', function (req, res) {
     // send all camping as JSON response
-    db.Camping.find()
+    db.Camping.find({},
       // populate fills in the camping feature id with all the camping feature data
-      .populate('features')
-      .exec(function(err, campingResults){
+      function(err, campingResults){
         if (err) {
 					status(500).send(err);
 					return;
@@ -109,9 +108,10 @@ app.post('/api/camping', function (req, res) {
       description: camping.description,
       trail: camping.trail,
       images: camping.images,
+      features: camping.features,
       coordinates: camping.coordinates
     });
-
+/*
    db.Features.find({name: req.body.features}, function(err, campingFeatures){
       // if the feature exists then add feature to camping
 			if (features.length !== 0) {
@@ -128,7 +128,7 @@ app.post('/api/camping', function (req, res) {
 				newFeatures.save(function(err, campingFeatures) {  //save new feature
         	console.log("new author:" + campingFeatures);
 					newFeatures.features = campingFeatures;
-
+*/
       // add new camping to database
      			newCamping.save(function(err, campingResults){  //save camping with features attribute
         		if (err) {
@@ -136,19 +136,17 @@ app.post('/api/camping', function (req, res) {
         		}
         		console.log("created ", camping.title);
         		res.json(campingResults);    // send camping to the view
-      		});
-				});
-			}
-   });
 
-});
+          });
+
+
+   });
 
 // Find camping by its id
 app.get('/api/camping/:id', function (req, res) {
-  db.Camping.findById(req.params.id)
+  db.Camping.findById(req.params.id,
     // populate the features
-    .populate('campingfeatures')
-    .exec(function(err, campingResults){
+    function(err, campingResults){
       if (err) {
         res.status(500).send(err);
         return;
@@ -167,7 +165,7 @@ app.get('/api/camping/search', function search(req, res) {
 	var campingToSearch = camping.filter(function(camping){
 	  console.log(camping.park);
 	  // check specific property of the object
-    return camping.park.includes(campingPark);
+    return camping.park == campingPark;
   });   // if the query is included in the park name
 
  res.json({ data: campingToSearch });  // respond with the search results from the query
@@ -178,27 +176,31 @@ app.get('/api/camping/search', function search(req, res) {
 //updates camping except for features
 app.put("/api/camping/:_id", function(req, res){
   var campingId = req.params._id;
-
   db.Camping.findOne({_id: campingId}, function(err, updatedCamping){
-		console.log(updatedCamping);
-		if (err) {
-		 res.status(500).send(err);
-		}
-      updatedCamping.id = req.body.id,
-      updatedCamping.title = req.body.title,
-      updatedCamping.park = req.body.park,
-      updatedCamping.description = req.body.description,
-      updatedCamping.trail = req.body.trail,
-      updatedCamping.images = req.body.images,
-      updatedCamping.features.features = req.body.features.features,
-      updatedCamping.coordinates = req.body.coordinates,
-			updatedCamping.save(function(err,saved){ //save updated attributes
-				if (err) {
-					return console.log("update error: " + err);
-				}
-				res.send(updatedCamping);
-			});
-    });
+  		console.log(updatedCamping);
+  		if (err) {
+  		 res.status(500).send(err);
+     } else if (updatedCamping === null) {
+       res.status(404).json({error: 'No camping fround by this ID'});
+     } else { 
+        updatedCamping.title = req.body.title,
+        updatedCamping.park = req.body.park,
+        updatedCamping.description = req.body.description,
+        updatedCamping.trail = req.body.trail,
+        updatedCamping.images = req.body.images,
+        updatedCamping.features = req.body.features,
+        updatedCamping.coordinates = req.body.coordinates,
+
+        updatedCamping.save(function(err,saved){ //save updated attributes
+  				if (err) {
+  					return console.log("update error: " + err);
+  				}
+  				res.send(updatedCamping);
+  			});
+     }
+
+  });
+
 });
 
 /* Delete camping listing */

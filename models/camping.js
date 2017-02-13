@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
-    Features = require('./features');
+//    Features = require('./features');
 
 var CampingSchema = new Schema({
 //  id: Number,
@@ -9,10 +9,7 @@ var CampingSchema = new Schema({
   description: String,
   trail: String,
   image: String,
-  features: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Features'
-  }],
+  features: Array,
   coordinates: Array
 
 });
