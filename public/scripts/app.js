@@ -1,62 +1,27 @@
-
-//var allCamping = [];
-
 $(document).ready(function(){
-
   $result = $('#campingTarget');
 
   $.ajax({
     method: 'GET',
     url: '/api/camping',
     success: handleSuccess,
-  //  error: handleError
   });
 
-  $('#newCampingForm').on('submit', function(e) {
-    e.preventDefault();
-    $.ajax({
-      method: 'POST',
-      url: '/api/camping',
-      data: $(this).serializeArray(),
-      success: newCampingSuccess,
-//      error: newCampingError
-    });
-  });
-
-  $result.on('click', '.deleteBtn', function() {
-    console.log('clicked delete button to', '/api/camping/:id') //+$(this).attr('data-id'));
-    $.ajax({
-      method: 'DELETE',
-      url: '/api/camping/:id',  // +$(this).attr('data-id'),
-      success: deleteCampingSuccess,
-//      error: deleteCampingError
-    });
-  });
-
-});
-
-function handleSuccess(data) {
-    console.log("received data:", data);
+  function handleSuccess(data) {
     var campingResults = data;
-    console.log(campingResults);
-
     if (campingResults.length > 0) {
-
-      // loop over each result
-      campingResults.forEach(function (result, index) {
-            // create object of data
-            var campingData = {
+      campingResults.forEach(function (result, index) {   // loop over each result
+            var campingData = {    // create object of data
               title: result.title,
               park: result.park,
-              images: result.images,
+              image: result.image,
               description: result.description,
             };
-
             var $resultstoDisplay = `
                     <br>
                     <div class="row">
                       <div class="col-xs-4">
-                        <img src="${campingData.images}" class="img-responsive">
+                        <img src="${result.image}" class="img-responsive">
                       </div>
                       <div class="col-sm-8">
                         <p> <strong> ${campingData.title} </strong> - ${campingData.park} </p>
@@ -66,52 +31,51 @@ function handleSuccess(data) {
                     </div>
                     <br>
                   `;
-
                   $result.append($resultstoDisplay);
-
             });
         } else {  // if there are no results, display this
             $result.append('<p class="text-center">No results</p>');
         }
       }
+  $('#newCampingForm').on('submit', function(e) {
+      e.preventDefault();
+      $.ajax({
+          method: 'POST',
+          url: '/api/camping',
+          data: $(this).serializeArray(),
+          success: newCampingSuccess,
+      });
+    });
 
-/*
-function handleSuccess(json) {
-  json(allCamping);
+  function newCampingSuccess() {
+    var resultstoDisplay = $('#newCampingForm input').val('');
+    $result.append(resultstoDisplay);
+  }
 
-function handleError(e) {
-  console.log('uh oh');
-  $('#campingTarget').text('Failed to load camping, is the server working?');
-}
+  $('.deleteBtn').on('click', function() {
+      $.ajax({
+        method: 'DELETE',
+        url: '/api/camping/:id',  // +$(this).attr('data-id'),
+        success: deleteCampingSuccess,
+      });
+  });
 
-function newCampingSuccess(json) {
-  $('#newCampingForm input').val('');
-  allCamping.push(json);
-
-}
-
-
-function newCampingError() {
-  console.log('newCamping error!');
-}
-
-
-function deleteCampingSuccess(json) {
-  var camping = json;
-  console.log(json);
-  var campingid = camping._id;
-  console.log('delete camping', campingid);
-  // find the camping with the correct ID and remove it from our allCamping array
-  for(var index = 0; index < allCamping.length; index++) {
-    if(allCamping[index]._id === campingid) {
-      allCamping.splice(index, 1);
-      break;  // we found our camping - no reason to keep searching (this is why we didn't use forEach)
+  function deleteCampingSuccess() {
+      var campingData = data;
+      var campingId = campingData._id
+      // find the camping with the correct ID and remove it from our allCamping array
+      for(let i = 0; i < $result.length; i++) {
+        if ($result[i]._id === campingId) {
+          $result.splice(i, 1);
+          break;  // we found our camping - no reason to keep searching (this is why we didn't use forEach)
+        }
+      };
+      var resultstoDisplay = $('#newCampingForm input').val('');
+      $result.append(resultstoDisplay);
     }
-  };
 
-  json(allCamping);
-};
-*/
+});
+
 /*
 function deleteCampingError() {
   console.log('deleteCamping error!');
