@@ -7,7 +7,7 @@ var CampingCoordinatesSchema = new Schema({
 });
 
 var CampingSchema = new Schema({
-  _id: Number,
+  id: Number,
   title: String,
   park: String,
   description: String,
